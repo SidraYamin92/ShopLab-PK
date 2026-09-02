@@ -1,0 +1,702 @@
+/* ================================================================
+   ShopLab PK — Research E-Commerce Simulation
+   Styled to resemble a Pakistani online shopping platform
+   Input names/data structure unchanged for research integrity
+================================================================ */
+
+:root {
+    --orange:    #F57224;
+    --orange-dk: #D4601A;
+    --navy:      #1a1a2e;
+    --navy-lt:   #16213e;
+    --teal:      #0f3460;
+    --white:     #FFFFFF;
+    --bg:        #F5F5F5;
+    --card:      #FFFFFF;
+    --text:      #1a1a1a;
+    --muted:     #6b7280;
+    --border:    #e5e7eb;
+    --green:     #16a34a;
+    --red:       #dc2626;
+    --yellow:    #f59e0b;
+    --radius:    8px;
+    --shadow:    0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overscroll-behavior: none; scroll-behavior: smooth; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ── PLATFORM HEADER ── */
+.platform-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.header-top {
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1.2rem;
+}
+.header-logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+}
+.header-logo span { color: var(--navy); }
+.header-tagline {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.85);
+    margin-top: 0.1rem;
+    letter-spacing: 0.03em;
+}
+.header-icons {
+    display: flex;
+    gap: 1.2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.header-nav {
+    background: var(--navy-lt);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+}
+.nav-categories { display: flex; gap: 1rem; }
+.nav-categories span { cursor: pointer; }
+.nav-categories span:hover { color: var(--orange); }
+
+/* ── PROGRESS BAR ── */
+.shopping-progress {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+.progress-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--orange), var(--orange-dk));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+.progress-label { white-space: nowrap; font-weight: 600; color: var(--navy); }
+
+/* ── MAIN CONTENT ── */
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* ── SECTIONS ── */
+.section { display: none; animation: fadeSlide 0.35s ease; }
+.section.active { display: block; }
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── LANDING / WELCOME ── */
+.landing-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.landing-hero h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+}
+.landing-hero .hero-sub {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+.badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+}
+.badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+.research-note {
+    background: var(--white);
+    color: var(--navy);
+    border-radius: var(--radius);
+    padding: 0.9rem 1rem;
+    font-size: 0.78rem;
+    text-align: left;
+    line-height: 1.6;
+}
+.research-note strong { color: var(--orange); }
+
+/* ── FORM SECTIONS (demographics, experience, psychometrics) ── */
+.form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+}
+.form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid var(--bg);
+}
+.form-card-icon { font-size: 1.2rem; }
+.form-card-title { font-size: 0.95rem; font-weight: 700; color: var(--navy); }
+.form-card-subtitle { font-size: 0.75rem; color: var(--muted); }
+
+/* ── QUESTIONS ── */
+.question {
+    margin-bottom: 1.1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg);
+}
+.question:last-of-type { border-bottom: none; padding-bottom: 0; }
+.question label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.45;
+}
+.question label .required { color: var(--orange); margin-left: 0.2rem; }
+.question select, .question textarea, .question input[type="number"], .question input[type="text"] {
+    width: 100%;
+    padding: 0.55rem 0.8rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.2s;
+}
+.question select:focus, .question input:focus {
+    outline: none;
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(245,114,36,0.1);
+}
+.radio-group { display: flex; flex-direction: column; gap: 0.45rem; }
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0.45rem 0.7rem;
+    border-radius: 6px;
+    border: 1.5px solid var(--border);
+    transition: all 0.15s;
+    font-size: 0.83rem;
+}
+.radio-group label:hover { border-color: var(--orange); background: #fff7f0; }
+.radio-group input[type="radio"]:checked + * { color: var(--orange); font-weight: 600; }
+
+/* ── LIKERT SCALES (styled as rating bars) ── */
+.likert-scale { margin-top: 0.3rem; }
+.likert-scale-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+.likert-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 0.4rem;
+    border: 1.5px solid var(--border);
+    overflow-x: auto;
+}
+.likert-label {
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-align: center;
+    min-width: 36px;
+    line-height: 1.2;
+    display: none; /* hidden on desktop, shown on mobile */
+}
+.likert-options {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    gap: 0.2rem;
+}
+.likert-options label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    padding: 0.3rem 0.2rem;
+    border-radius: 6px;
+    transition: all 0.15s;
+    min-width: 32px;
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--muted);
+    border: none;
+}
+.likert-options label:hover { background: rgba(245,114,36,0.1); color: var(--orange); }
+.likert-options input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--orange);
+    cursor: pointer;
+}
+
+/* ── PRODUCT PAGES ── */
+.product-page { animation: fadeSlide 0.35s ease; }
+.product-breadcrumb {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+}
+.product-breadcrumb span { color: var(--orange); }
+.product-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+}
+.product-image-wrapper {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+.product-img-placeholder {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+.product-img-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-style: italic;
+}
+.product-condition-badge {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    background: var(--orange);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+}
+.product-info { padding: 1rem; }
+.product-store {
+    font-size: 0.7rem;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.product-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+    line-height: 1.35;
+}
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+}
+.stars { color: var(--yellow); }
+.product-price-area { margin-bottom: 0.7rem; }
+.price-original {
+    text-decoration: line-through;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+.price-current {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--orange);
+}
+.price-discount {
+    background: var(--red);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+}
+.product-manipulation { margin: 0.6rem 0; }
+.promo-box {
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.promo-box.gain { background: #dcfce7; color: var(--green); border: 1px solid #bbf7d0; }
+.promo-box.loss { background: #fef9c3; color: #854d0e; border: 1px solid #fef08a; }
+.social-proof {
+    background: linear-gradient(135deg, #fff7ed, #ffedd5);
+    border: 1px solid #fed7aa;
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #9a3412;
+}
+.scarcity-warning {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--red);
+}
+.stock-available {
+    font-size: 0.78rem;
+    color: var(--green);
+    font-weight: 600;
+}
+.countdown {
+    background: var(--navy);
+    color: white;
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.countdown-timer {
+    background: var(--orange);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+.sale-available { font-size: 0.78rem; color: var(--green); font-weight: 600; }
+.product-specs {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 0.7rem;
+    margin: 0.6rem 0;
+    font-size: 0.78rem;
+}
+.product-specs ul { padding-left: 1rem; }
+.product-specs li { margin-bottom: 0.2rem; color: var(--muted); }
+.product-specs .spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.76rem;
+}
+.spec-row .spec-key { color: var(--muted); }
+.spec-row .spec-val { font-weight: 600; color: var(--text); }
+.product-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--bg);
+}
+.btn-add-cart {
+    flex: 1;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.65rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: default;
+    opacity: 0.7;
+}
+.btn-wishlist {
+    background: white;
+    color: var(--muted);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+    cursor: default;
+}
+
+/* ── PRODUCT REVIEWS (S7 Confirmation Bias) ── */
+.review-card {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 0.7rem 0.8rem;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid var(--orange);
+    font-size: 0.78rem;
+}
+.review-card .rev-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+}
+.review-card .rev-name { font-weight: 700; color: var(--navy); font-size: 0.78rem; }
+.review-card .rev-stars { color: var(--yellow); }
+.review-card .rev-body { color: var(--muted); line-height: 1.4; }
+
+/* ── PURCHASE DECISION AREA (questions reframed) ── */
+.purchase-decision {
+    background: var(--card);
+    border: 2px solid var(--orange);
+    border-radius: var(--radius);
+    padding: 1rem;
+    margin-top: 0.8rem;
+}
+.purchase-decision-header {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.purchase-decision-header::before {
+    content: "🛒";
+    font-size: 1rem;
+}
+/* Scarcity questions background */
+.manip-check-area {
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem;
+    margin-top: 0.8rem;
+}
+.manip-check-header {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* ── PSYCHOMETRIC SECTIONS (styled as platform feedback) ── */
+.feedback-intro {
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    color: white;
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+}
+.feedback-intro h2 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.2rem; }
+.feedback-intro p { font-size: 0.78rem; opacity: 0.85; }
+.feedback-section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid #ffedd5;
+}
+
+/* ── CRT PUZZLE SECTION ── */
+.puzzle-card {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    color: white;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.puzzle-card h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.3rem; }
+.puzzle-card p { font-size: 0.78rem; opacity: 0.8; margin-bottom: 0.8rem; }
+.voucher-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    border-radius: 20px;
+    padding: 0.3rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+.crt-question-card {
+    background: white;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+}
+.crt-q-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+    line-height: 1.45;
+}
+.crt-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.crt-input-row input {
+    width: 100px;
+    padding: 0.45rem 0.7rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--navy);
+}
+.crt-input-row span { font-size: 0.78rem; color: var(--muted); }
+
+/* ── BUTTONS ── */
+.button-group {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+}
+.btn {
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+.btn-primary {
+    background: var(--orange);
+    color: white;
+    flex: 1;
+}
+.btn-primary:hover { background: var(--orange-dk); transform: translateY(-1px); }
+.btn-secondary {
+    background: white;
+    color: var(--muted);
+    border: 1.5px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ── THANK YOU ── */
+.thankyou-card {
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.thankyou-card h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+.thankyou-card p { font-size: 0.85rem; opacity: 0.85; line-height: 1.6; }
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+}
+.stat-box {
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 0.8rem 0.5rem;
+    text-align: center;
+}
+.stat-num { font-size: 1.4rem; font-weight: 800; color: var(--orange); }
+.stat-lbl { font-size: 0.65rem; opacity: 0.8; margin-top: 0.2rem; }
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 520px) {
+    .container { padding: 0.6rem; }
+    .product-info { padding: 0.8rem; }
+    .likert-options { gap: 0.1rem; }
+    .likert-options label { min-width: 28px; font-size: 0.7rem; padding: 0.25rem 0.1rem; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 380px) {
+    .likert-options label { min-width: 24px; font-size: 0.65rem; }
+    .header-logo { font-size: 1.1rem; }
+}
+
+/* ── TOOLTIP (for research transparency) ── */
+.research-marker {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: var(--orange);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.6rem;
+    text-align: center;
+    line-height: 14px;
+    cursor: help;
+    margin-left: 4px;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+.section-divider {
+    border: none;
+    border-top: 2px solid var(--bg);
+    margin: 1rem 0;
+}
